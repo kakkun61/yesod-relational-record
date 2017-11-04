@@ -1,0 +1,49 @@
+name:              yesod-relational-record
+version:           0.1.0
+license:           MIT
+license-file:      LICENSE
+synopsis:          haskell-relational-record extension for Yesod.
+homepage:          https://github.com/kakkun61/yesod-relational-record
+category:          Web, Yesod
+author:            Kazuki Okamoto <kazuki.okamoto@kakkun61.com>
+stability:         Alpha
+cabal-version:     >= 1.10
+build-type:        Simple
+
+Flag dev
+    Description:   development flag
+    Default:       False
+
+library
+    hs-source-dirs:     src
+    exposed-modules:    Yesod.Relational
+                      , Yesod.Auth.Relational
+
+    if flag(dev)
+        cpp-options:    -DDEVELOPMENT
+        ghc-options:    -Wall -fwarn-tabs -O0
+    else
+        ghc-options:    -Wall -fwarn-tabs -O2
+
+    default-extensions: TemplateHaskell
+                      , MultiParamTypeClasses
+                      , FlexibleInstances
+
+    build-depends:      base
+                      , yesod-core
+                      , yesod-auth
+                      , mtl
+                      , transformers
+                      , HDBC
+                      , HDBC-session
+                      , names-th
+                      , persistable-record
+                      , persistable-types-HDBC-pg
+                      , relational-query
+                      , relational-query-HDBC
+                      , relational-record
+                      , relational-schemas
+                      , sql-words
+                      , text-postgresql
+
+    default-language:   Haskell2010
